@@ -1,0 +1,4 @@
+name: airmac
+
+include:
+  - ./services/pihole/pihole.docker-compose.yml
