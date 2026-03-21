@@ -2,3 +2,4 @@ name: pibox
 
 include:
   - ./services/pihole/pihole.docker-compose.yml
+  - ./services/zigbee2mqtt/zigbee2mqtt.docker-compose.yml
