@@ -1,3 +1,14 @@
 */**/*.env
 */**/data/
 */**/volumes/
+
+# from tomMoulard/make-my-server
+*.log
+blog/blog*
+blog/nginx/conf/www
+gitlab/logs
+portainer/data
+.env
+.env.generated
+*.patch
+*.swp
