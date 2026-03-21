@@ -1,0 +1,4 @@
+name: pibox
+
+include:
+  - ./services/pihole/pihole.docker-compose.yml
