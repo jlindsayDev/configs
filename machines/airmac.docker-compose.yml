@@ -2,3 +2,4 @@ name: airmac
 
 include:
   - ./services/pihole/pihole.docker-compose.yml
+  - ./services/caddy-docker-proxy/caddy-docker-proxy.docker-compose.yml
