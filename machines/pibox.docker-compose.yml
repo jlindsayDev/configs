@@ -1,9 +1,9 @@
 name: pibox
 
 include:
+  - ./services/caddy-docker-proxy/caddy-docker-proxy.docker-compose.yml
   - ./services/pihole/pihole.docker-compose.yml
   - ./services/zigbee2mqtt/zigbee2mqtt.docker-compose.yml
-  - ./services/caddy-docker-proxy/caddy-docker-proxy.docker-compose.yml
   # - ./services/homebridge/homebridge.docker-compose.yml
 
   # - ./services/ntfy/ntfy.docker-compose.yml
