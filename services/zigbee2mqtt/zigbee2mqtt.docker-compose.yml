@@ -9,12 +9,20 @@ services:
     #   - dialout
     # user: 1000:1000
 
+    depends_on:
+      - caddy-docker-proxy
+    labels:
+      caddy: zigbee2mqtt.pibox.lan
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+    networks:
+      - caddy
+
     volumes:
       - ./data:/app/data
       - /run/udev:/run/udev:ro
-    ports:
-      # Frontend port
-      - 8080:8080
+    # ports:
+    #   # Frontend port
+    #   - 8080:8080
     environment:
       - TZ=America/Los_Angeles
     devices:
