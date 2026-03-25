@@ -10,3 +10,7 @@ include:
   # - ./services/changedetection/changedetection.docker-compose.yml
   # - ./services/jellyfin/jellyfin.docker-compose.yml
   # - ./services/syncthing/syncthing.docker-compose.yml
+
+networks:
+  caddy:
+    external: true
