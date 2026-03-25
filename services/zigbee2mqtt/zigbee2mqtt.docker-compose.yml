@@ -1,4 +1,19 @@
 services:
+  mqtt:
+    container_name: mqtt
+    hostname: mqtt
+    image: eclipse-mosquitto:latest
+    restart: on-failure
+
+    ports:
+      - 1883:1883
+      - 9001:9001
+    networks:
+      - caddy
+
+    volumes:
+      - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: ghcr.io/koenkk/zigbee2mqtt
@@ -10,21 +25,27 @@ services:
     # user: 1000:1000
 
     depends_on:
+      - mqtt
       - caddy-docker-proxy
+
     labels:
       caddy: zigbee2mqtt.pibox.lan
       caddy.reverse_proxy: "{{upstreams 8080}}"
+
     networks:
       - caddy
+
+    ports:
+      # Frontend port
+      - 8080:8080
 
     volumes:
       - ./data:/app/data
       - /run/udev:/run/udev:ro
-    # ports:
-    #   # Frontend port
-    #   - 8080:8080
+
     environment:
       - TZ=America/Los_Angeles
+
     devices:
       # Make sure this matched your adapter location
       - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_3a7de9d2f912ec11942420c7bd930c07-if00-port0:/dev/ttyUSB0
