@@ -12,3 +12,5 @@ portainer/data
 .env.generated
 *.patch
 *.swp
+*.db
+*.backup
