@@ -30,12 +30,13 @@ services:
     labels:
       caddy: zigbee2mqtt.pibox.lan
       caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy.tls: "internal"
 
     networks:
       - caddy
 
     ports:
-      - 8080:8080
+      - 8081:8080
 
     volumes:
       - ./zigbee2mqtt-data:/app/data
