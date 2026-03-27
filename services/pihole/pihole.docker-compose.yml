@@ -6,11 +6,11 @@ services:
     image: pihole/pihole:latest
     restart: on-failure
 
-    depends_on:
-      - caddy-docker-proxy
     labels:
       caddy: pihole.pibox.lan
       caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.tls: "internal"
+
     networks:
       - caddy
 
