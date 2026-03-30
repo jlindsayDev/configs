@@ -3,7 +3,7 @@
 services:
   caddy-docker-proxy:
     container_name: caddy-docker-proxy
-    image: lucaslorentz/caddy-docker-proxy:latest
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
     restart: on-failure
 
     ports:
