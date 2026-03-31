@@ -40,13 +40,6 @@ services:
         target: /media/tv
         read_only: true
 
-<<<<<<< HEAD
-    # Optional - alternative address used for autodiscovery
-    environment:
-      - JELLYFIN_PublishedServerUrl=https://jellyfin.pibox.lan
-
-=======
->>>>>>> 71c7f2a (rename `docker-compose` files so renovate can find them)
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - "host.docker.internal:host-gateway"

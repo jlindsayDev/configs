@@ -3,27 +3,15 @@ services:
     container_name: tailscale
     image: tailscale/tailscale:latest
     hostname: tailscale
-<<<<<<< HEAD
     environment:
-      - TS_EXTRA_ARGS=--advertise-tags=tag:pibox
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
-=======
-    restart: unless-stopped
-
-    environment:
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=true
->>>>>>> 71c7f2a (rename `docker-compose` files so renovate can find them)
     volumes:
       - ./data/state:/var/lib/tailscale
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-<<<<<<< HEAD
     restart: unless-stopped
-=======
->>>>>>> 71c7f2a (rename `docker-compose` files so renovate can find them)
     networks:
       - caddy
