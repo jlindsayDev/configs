@@ -1,6 +1,9 @@
 services:
   cockpit-proxy:
+    container_name: cockpit-proxy
     image: alpine
+    restart: on-failure
+
     command: sh -c "sleep infinity"
 
     networks:
@@ -11,4 +14,4 @@ services:
     labels:
       caddy: cockpit.pibox.lan
       caddy.reverse_proxy: host.docker.internal:9090
-      caddy.tls: internal
+      # caddy.tls: internal

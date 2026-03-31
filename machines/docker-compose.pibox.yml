@@ -1,0 +1,22 @@
+name: pibox
+
+include:
+  # - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
+  # - ./services/cockpit-proxy/docker-compose.cockpit-proxy.yml
+
+  - ./services/pihole/docker-compose.pihole.yml
+  - ./services/zigbee2mqtt/docker-compose.zigbee2mqtt.yml
+  # - ./services/tailscale/docker-compose.tailscale.yml
+
+  # - ./services/homebridge/docker-compose.homebridge.yml
+  - ./services/jellyfin/docker-compose.jellyfin.yml
+
+  # - ./services/ntfy/docker-compose.ntfy.yml
+  # - ./services/changedetection/docker-compose.changedetection.yml
+  # - ./services/syncthing/docker-compose.syncthing.yml
+
+env_file: .pibox.env
+
+networks:
+  caddy:
+    external: true

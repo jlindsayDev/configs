@@ -1,0 +1,34 @@
+# https://github.com/binwiederhier/ntfy/blob/main/docker-compose.yml
+
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    hostname: ntfy
+    restart: on-failure
+
+    command:
+      - serve
+
+    environment:
+      - TZ=PST
+
+    # rootless
+    # user: UID:GID # optional: Set custom user/group or uid/gid
+    depends_on:
+      - caddy-docker-proxy
+    labels:
+      caddy: ntfy.airmac.local
+      caddy.reverse_proxy: "{{upstreams 80}}"
+    networks:
+      - caddy
+
+    volumes:
+      - ntfy_data:/var/cache/ntfy
+      - ntfy_data:/etc/ntfy
+
+    # ports:
+    #   - 80:80
+
+volumes:
+  ntfy_data:
