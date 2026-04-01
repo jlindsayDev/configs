@@ -26,6 +26,9 @@ include:
   # Conduit/Mautrix - upstreams 8448 and 8009 for web
   - ./services/conduit/docker-compose.conduit.yml
 
+  # Syncthing - upstreams 8384
+  - ./services/syncthing/docker-compose.syncthing.yml
+
   # WatchYourLan - upstreams 8840
   # - ./services/watchyourlan/docker-compose.watchyourlan.yml
 
