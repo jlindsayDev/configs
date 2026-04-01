@@ -1,0 +1,17 @@
+# https://homarr.dev/docs/getting-started/installation/docker/
+services:
+  homarr:
+    hostname: homarr
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: on-failure
+
+    networks:
+      - caddy
+
+    ports:
+      - 80:7575
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data:/appdata
