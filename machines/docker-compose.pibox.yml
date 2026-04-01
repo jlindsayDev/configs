@@ -23,6 +23,9 @@ include:
   # Jellyfin - upstreams 8096
   - ./services/jellyfin/docker-compose.jellyfin.yml
 
+  # Conduit/Mautrix - upstreams 8448 and 8009 for web
+  - ./services/conduit/docker-compose.conduit.yml
+
   # Ntfy - upstreams 8086
   # - ./services/ntfy/docker-compose.ntfy.yml
 
