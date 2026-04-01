@@ -1,0 +1,90 @@
+{
+    "bridge": {
+        "name": "Homebridge 7E7C",
+        "username": "0E:82:C6:68:7E:7C",
+        "port": 51714,
+        "pin": "804-17-038",
+        "advertiser": "resolved"
+    },
+    "accessories": [],
+    "platforms": [
+        {
+            "name": "Config",
+            "platform": "config",
+            "port": 8581,
+            "enableMdnsAdvertise": true
+        },
+        {
+            "mqtt": {
+                "base_topic": "zigbee2mqtt",
+                "server": "mqtt://pibox.lan:1883",
+                "reject_unauthorized": false,
+                "keepalive": 60,
+                "version": 4,
+                "disable_qos": false
+            },
+            "defaults": {
+                "exclude": false,
+                "converters": {
+                    "switch": {
+                        "type": "switch"
+                    }
+                }
+            },
+            "exclude_grouped_devices": false,
+            "devices": [
+                {
+                    "id": "zigbee2mqtt/Blue Light",
+                    "exclude": false,
+                    "converters": {
+                        "switch": {
+                            "type": "switch"
+                        }
+                    }
+                },
+                {
+                    "id": "zigbee2mqtt/Lamp",
+                    "exclude": false,
+                    "converters": {
+                        "switch": {
+                            "type": "outlet"
+                        }
+                    }
+                }
+            ],
+            "_bridge": {
+                "name": "Homebridge Zigbee2MQTT",
+                "username": "0E:76:A3:28:1B:A6",
+                "port": 35219
+            },
+            "platform": "zigbee2mqtt"
+        },
+        {
+            "devices": [
+                "Tree"
+            ],
+            "amazonDomain": "amazon.com",
+            "language": "en-US",
+            "auth": {
+                "refreshInterval": 4,
+                "proxy": {
+                    "clientHost": "pibox.lan",
+                    "port": 9557
+                }
+            },
+            "performance": {
+                "cacheTTL": 60
+            },
+            "debug": true,
+            "platform": "HomebridgeAlexaSmartHome",
+            "_bridge": {
+                "username": "0E:06:49:64:19:F9",
+                "port": 46768,
+                "name": "Homebridge Alexa Smart Home"
+            }
+        }
+    ],
+    "disabledPlugins": [
+        "homebridge-alexa-smarthome"
+    ]
+}
