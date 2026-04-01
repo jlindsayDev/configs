@@ -4,15 +4,16 @@
 services:
   pihole:
     container_name: pihole
+    hostname: pihole
     image: pihole/pihole:latest
     restart: on-failure
+
+    networks:
+      - caddy
 
     volumes:
       - ./data:/etc/pihole
       - /etc/localtime:/etc/localtime:ro
-
-    networks:
-      - caddy
 
     ports:
       - 53:53/tcp # DNS
@@ -35,9 +36,6 @@ services:
       FTLCONF_webserver_api_password: "correct horse battery staple"
       FTLCONF_misc_dnsmasq_lines: "address=/pibox.lan/192.168.1.168"
       FTLCONF_dns_upstreams: "1.1.1.1; 1.0.0.1; 8.8.8.8; 8.8.4.4"
-
-    env_file:
-      - .env
 
     # cap_add:
     #   # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
