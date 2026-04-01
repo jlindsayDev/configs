@@ -26,6 +26,12 @@ include:
   # Conduit/Mautrix - upstreams 8448 and 8009 for web
   - ./services/conduit/docker-compose.conduit.yml
 
+  # WatchYourLan - upstreams 8840
+  - ./services/watchyourlan/docker-compose.watchyourlan.yml
+
+  # WatchYourPorts - upstreams 8853
+  - ./services/watchyourports/docker-compose.watchyourports.yml
+
   # Ntfy - upstreams 8086
   # - ./services/ntfy/docker-compose.ntfy.yml
 
