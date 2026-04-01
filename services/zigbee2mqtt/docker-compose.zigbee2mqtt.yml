@@ -1,35 +1,21 @@
 services:
-  mqtt:
-    container_name: mqtt
-    hostname: mqtt
-    image: eclipse-mosquitto:latest
-    restart: on-failure
-
-    ports:
-      - 1883:1883
-      - 9001:9001
-    networks:
-      - caddy
-
-    volumes:
-      - ./mqtt-config:/mosquitto/config
-
   zigbee2mqtt:
     container_name: zigbee2mqtt
+    hostname: zigbee2mqtt
     image: ghcr.io/koenkk/zigbee2mqtt
     restart: unless-stopped
 
     # rootless
-    # group_add:
-    #   - dialout
-    # user: 1000:1000
+    group_add:
+      - dialout
+    user: 1000:1000
 
     depends_on:
       - mqtt
 
     labels:
       caddy: zigbee2mqtt.pibox.lan
-      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy.reverse_proxy: "{{upstreams 8081}}"
       caddy.tls: "internal"
 
     networks:
@@ -39,7 +25,7 @@ services:
       - 8081:8080
 
     volumes:
-      - ./zigbee2mqtt-data:/app/data
+      - ./data:/app/data
       - /run/udev:/run/udev:ro
 
     environment:

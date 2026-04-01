@@ -1,0 +1,16 @@
+services:
+  mqtt:
+    container_name: mqtt
+    hostname: mqtt
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+
+    ports:
+      - 1883:1883 # MQTT
+      - 9001:9001 # HTTP/WebSockets
+
+    networks:
+      - caddy
+
+    volumes:
+      - ./config:/mosquitto/config
