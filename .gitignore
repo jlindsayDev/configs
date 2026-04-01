@@ -1,6 +1,11 @@
-*/**/*.env
-*/**/data/
-*/**/volumes/
+*.env*
+
+data/
+config/
+logs/
+volumes/
+metadata/
+cache/
 
 # from tomMoulard/make-my-server
 *.log
