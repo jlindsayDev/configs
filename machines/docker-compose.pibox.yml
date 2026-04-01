@@ -2,7 +2,7 @@ name: pibox
 
 include:
   # Reverse Proxy
-  # - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
+  - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
   # - ./services/nginx-proxy-manager/docker-compose.nginx-proxy-manager.yml
 
   # Pibox Home Page - upstreams 80
@@ -10,7 +10,7 @@ include:
   # - ./services/homarr/docker-compose.homarr.yml
   # - ./services/cockpit-proxy/docker-compose.cockpit-proxy.yml
 
-  # Pi-hole - upstreams 8080/9443
+  # Pi-hole - upstreams 8080/8443
   - ./services/pihole/docker-compose.pihole.yml
 
   # ZigBee - upstreams 8081
@@ -27,10 +27,10 @@ include:
   - ./services/conduit/docker-compose.conduit.yml
 
   # WatchYourLan - upstreams 8840
-  - ./services/watchyourlan/docker-compose.watchyourlan.yml
+  # - ./services/watchyourlan/docker-compose.watchyourlan.yml
 
   # WatchYourPorts - upstreams 8853
-  - ./services/watchyourports/docker-compose.watchyourports.yml
+  # - ./services/watchyourports/docker-compose.watchyourports.yml
 
   # Ntfy - upstreams 8086
   # - ./services/ntfy/docker-compose.ntfy.yml
