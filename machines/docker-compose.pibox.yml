@@ -1,21 +1,33 @@
 name: pibox
 
 include:
+  # Reverse Proxy
   # - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
+  # - ./services/nginx-proxy-manager/docker-compose.nginx-proxy-manager.yml
+
+  # upstreams 80
+  # - ./services/homepage/docker-compose.homepage.yml
+  - ./services/homarr/docker-compose.homarr.yml
   # - ./services/cockpit-proxy/docker-compose.cockpit-proxy.yml
 
+  # upstreams 8080/9443
   - ./services/pihole/docker-compose.pihole.yml
-  - ./services/zigbee2mqtt/docker-compose.zigbee2mqtt.yml
-  # - ./services/tailscale/docker-compose.tailscale.yml
 
-  # - ./services/homebridge/docker-compose.homebridge.yml
+  # ZigBee - upstreams 8081
+  - ./services/mqtt/docker-compose.mqtt.yml
+  - ./services/zigbee2mqtt/docker-compose.zigbee2mqtt.yml
+
+  # upstreams 8096
   - ./services/jellyfin/docker-compose.jellyfin.yml
+
+  # upstreams 8581
+  - ./services/homebridge/docker-compose.homebridge.yml
+
+  # - ./services/tailscale/docker-compose.tailscale.yml
 
   # - ./services/ntfy/docker-compose.ntfy.yml
   # - ./services/changedetection/docker-compose.changedetection.yml
   # - ./services/syncthing/docker-compose.syncthing.yml
-
-env_file: .pibox.env
 
 networks:
   caddy:
