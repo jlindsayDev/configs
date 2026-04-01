@@ -1,7 +1,7 @@
 # Pi-hole configuration file (v6.5)
 # Encoding: UTF-8
 # This file is managed by pihole-FTL
-# Last updated on 2026-03-30 21:25:40 PDT
+# Last updated on 2026-04-01 11:32:24 PDT
 
 [dns]
   # Upstream DNS Servers to be used by Pi-hole. If this is not set, Pi-hole will not
@@ -13,9 +13,9 @@
   #     Array of IP addresses and/or hostnames, optionally with a port (#...)
   upstreams = [
     "1.1.1.1",
-    " 1.0.0.1",
-    " 8.8.8.8",
-    " 8.8.4.4"
+    "1.0.0.1",
+    "8.8.8.8",
+    "8.8.4.4"
   ] ### CHANGED (env), default = []
 
   # Use this option to control deep CNAME inspection. Disabling it might be beneficial
@@ -131,7 +131,7 @@
   hosts = [
     "192.168.1.168 pibox.lan",
     "192.168.1.168 pibox.internal"
-  ] ### CHANGED, default = []
+  ] ### CHANGED (env), default = []
 
   # If set, queries for plain names, without dots or domain parts, are never forwarded to
   # upstream nameservers
@@ -710,7 +710,7 @@
     #
     # Allowed values are:
     #     A positive integer value in seconds
-    interval = 3600
+    interval = 0 ### CHANGED (env), default = 3600
 
     # Number of NTP syncs to perform and average before updating the system time
     #
@@ -916,7 +916,7 @@
   #
   # Allowed values are:
   #     A comma-separated list of <[ip_address:]port>
-  port = "8080, 9443" ### CHANGED (env), default = "80o,443os,[::]:80o,[::]:443os"
+  port = "8080,8443os,[::]:8080,[::]:8443os" ### CHANGED (env), default = "80o,443os,[::]:80o,[::]:443os"
 
   # Maximum number of worker threads allowed.
   #
@@ -1406,7 +1406,8 @@
   # Allowed values are:
   #     Array of valid dnsmasq config line options
   dnsmasq_lines = [
-    "address=/pibox.lan/192.168.1.168"
+    "address=/pibox.lan/192.168.1.168",
+    "address=/pibox.internal/192.168.1.168"
   ] ### CHANGED (env), default = []
 
   # Log additional information about queries and replies to pihole.log
@@ -1419,7 +1420,7 @@
   #
   # Allowed values are:
   #     true or false
-  extraLogging = false
+  extraLogging = true ### CHANGED (env), default = false
 
   # Put configuration into read-only mode. This will prevent any changes to the
   # configuration file via the API or CLI. This setting useful when a configuration is
@@ -1723,9 +1724,12 @@
   all = false
 
 # Configuration statistics:
-# 166 total entries out of which 160 entries are default
-# --> 6 entries are modified
-# 3 entries are forced through environment:
+# 166 total entries out of which 158 entries are default
+# --> 8 entries are modified
+# 6 entries are forced through environment:
 #   - dns.upstreams
+#   - dns.hosts
+#   - ntp.sync.interval
 #   - webserver.port
 #   - misc.dnsmasq_lines
+#   - misc.extraLogging

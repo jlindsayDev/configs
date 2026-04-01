@@ -4,23 +4,23 @@ services:
   jellyfin:
     container_name: jellyfin
     hostname: jellyfin
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     restart: on-failure
 
-    # Optional - specify the uid and gid you would like Jellyfin to use instead of root
     user: 1000:1000
 
     ports:
       - 8096:8096/tcp
+      - 8920:8920/tcp
       - 7359:7359/udp
-
-    labels:
-      caddy: jellyfin.pibox.lan
-      caddy.reverse_proxy: "{{upstreams 8096}}"
-      caddy.tls: internal
+      - 1900:1900/udp
 
     networks:
       - caddy
+    labels:
+      caddy: jellyfin.pibox.lan
+      caddy.reverse_proxy: "{{upstreams https 8920}}"
+      caddy.tls: internal
 
     volumes:
       - ./config:/config

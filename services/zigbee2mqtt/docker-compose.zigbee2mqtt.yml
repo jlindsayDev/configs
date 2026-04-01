@@ -5,7 +5,6 @@ services:
     image: ghcr.io/koenkk/zigbee2mqtt
     restart: unless-stopped
 
-    # rootless
     group_add:
       - dialout
     user: 1000:1000
@@ -13,16 +12,14 @@ services:
     depends_on:
       - mqtt
 
+    ports:
+      - 8081:8080
+    networks:
+      - caddy
     labels:
       caddy: zigbee2mqtt.pibox.lan
       caddy.reverse_proxy: "{{upstreams 8081}}"
-      caddy.tls: "internal"
-
-    networks:
-      - caddy
-
-    ports:
-      - 8081:8080
+      caddy.tls: internal
 
     volumes:
       - ./data:/app/data

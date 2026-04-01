@@ -13,7 +13,7 @@ services:
       - caddy
     labels:
       caddy: pihole.pibox.lan
-      caddy.reverse_proxy: "{{upstreams http 8080}}"
+      caddy.reverse_proxy: "{{upstreams https 8443}}"
       caddy.tls: internal
 
     volumes:
@@ -23,26 +23,24 @@ services:
     ports:
       - 53:53/tcp # DNS
       - 53:53/udp # DNS
-      - 8080:8080/tcp
-      - 8443:8443/tcp
-      # - 67:67/udp # DHCP
-      - 123:123/udp # NTP
+      - 8080:8080/tcp # HTTP
+      - 8443:8443/tcp # HTTPS
 
     environment:
       PIHOLE_UID: 1000
       PIHOLE_GUID: 1000
       TZ: America/Los_Angeles
-      # FTLCONF_dns_dnssec: true
       FTLCONF_dns_hosts: |-
         192.168.1.168 pibox.lan
         192.168.1.168 pibox.internal
-      FTLCONF_dns_listeningMode: ALL
-      FTLCONF_dns_extraLogging: true
+      FTLCONF_ntp_sync_interval: 0
       FTLCONF_webserver_port: "8080,8443os,[::]:8080,[::]:8443os"
       FTLCONF_webserver_api_password: "correct horse battery staple"
+      FTLCONF_misc_extraLogging: true
       FTLCONF_misc_dnsmasq_lines: |-
         address=/pibox.lan/192.168.1.168
         address=/pibox.internal/192.168.1.168
+      FTLCONF_dns_listeningMode: LOCAL
       FTLCONF_dns_upstreams: |-
         1.1.1.1
         1.0.0.1
@@ -51,13 +49,4 @@ services:
 
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-      # Required if you are using Pi-hole as your DHCP server, else not needed
-      - NET_ADMIN
-      # Required if you are using Pi-hole as your NTP client to be able to set the host's system time
-      - SYS_TIME
-      # Optional, if Pi-hole should get some more processing time
       - SYS_NICE
-      - CHOWN
-
-# volumes:
-#   pihole_data: {}

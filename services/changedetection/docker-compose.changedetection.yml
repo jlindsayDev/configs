@@ -15,6 +15,7 @@ services:
     labels:
       caddy: changedetection.airmac.local
       caddy.reverse_proxy: "{{upstreams 5000}}"
+      caddy.tls: internal
     networks:
       - caddy
 

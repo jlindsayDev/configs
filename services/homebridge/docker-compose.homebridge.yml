@@ -7,12 +7,17 @@ services:
     hostname: homebridge
     container_name: homebridge
 
+    # user: 1000:1000
+
     depends_on:
       - zigbee2mqtt
 
     network_mode: host
-    # networks:
-    #   - caddy
+    # labels:
+    #   caddy: homebridge.pibox.lan
+    #   caddy.reverse_proxy: "{{upstreams http 8581}}"
+    #   caddy.tls: internal
+
     # ports:
     #   - 8581:8581
     #   - 9557:9557 # Alexa
