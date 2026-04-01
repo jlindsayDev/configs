@@ -7,6 +7,9 @@ services:
     hostname: homebridge
     container_name: homebridge
 
+    depends_on:
+      - zigbee2mqtt
+
     network_mode: host
     # networks:
     #   - caddy
