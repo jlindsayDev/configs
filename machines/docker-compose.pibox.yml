@@ -5,26 +5,25 @@ include:
   # - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
   # - ./services/nginx-proxy-manager/docker-compose.nginx-proxy-manager.yml
 
-  # Pibox Home Page
-  # upstreams 80
+  # Pibox Home Page - upstreams 80
   # - ./services/homepage/docker-compose.homepage.yml
-  - ./services/homarr/docker-compose.homarr.yml
+  # - ./services/homarr/docker-compose.homarr.yml
   # - ./services/cockpit-proxy/docker-compose.cockpit-proxy.yml
 
-  # upstreams 8080/9443
+  # Pi-hole - upstreams 8080/9443
   - ./services/pihole/docker-compose.pihole.yml
 
   # ZigBee - upstreams 8081
   - ./services/mqtt/docker-compose.mqtt.yml
   - ./services/zigbee2mqtt/docker-compose.zigbee2mqtt.yml
 
-  # upstreams 8096
-  - ./services/jellyfin/docker-compose.jellyfin.yml
-
-  # upstreams 8581
+  # Homebridge - upstreams 8581
   - ./services/homebridge/docker-compose.homebridge.yml
 
-  # upstreams 8086
+  # Jellyfin - upstreams 8096
+  - ./services/jellyfin/docker-compose.jellyfin.yml
+
+  # Ntfy - upstreams 8086
   # - ./services/ntfy/docker-compose.ntfy.yml
 
   # TODO
