@@ -5,6 +5,7 @@ include:
   # - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
   # - ./services/nginx-proxy-manager/docker-compose.nginx-proxy-manager.yml
 
+  # Pibox Home Page
   # upstreams 80
   # - ./services/homepage/docker-compose.homepage.yml
   - ./services/homarr/docker-compose.homarr.yml
@@ -23,9 +24,11 @@ include:
   # upstreams 8581
   - ./services/homebridge/docker-compose.homebridge.yml
 
-  # - ./services/tailscale/docker-compose.tailscale.yml
-
+  # upstreams 8086
   # - ./services/ntfy/docker-compose.ntfy.yml
+
+  # TODO
+  # - ./services/tailscale/docker-compose.tailscale.yml
   # - ./services/changedetection/docker-compose.changedetection.yml
   # - ./services/syncthing/docker-compose.syncthing.yml
 

@@ -14,12 +14,13 @@ services:
       - TZ=PST
 
     # rootless
-    # user: UID:GID # optional: Set custom user/group or uid/gid
-    depends_on:
-      - caddy-docker-proxy
+    user: 1000:1000 # optional: Set custom user/group or uid/gid
+
     labels:
       caddy: ntfy.airmac.local
       caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.tls: internal
+
     networks:
       - caddy
 
@@ -27,8 +28,8 @@ services:
       - ntfy_data:/var/cache/ntfy
       - ntfy_data:/etc/ntfy
 
-    # ports:
-    #   - 80:80
+    ports:
+      - 8086:80
 
 volumes:
   ntfy_data:
