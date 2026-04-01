@@ -6,6 +6,9 @@ services:
 
     command: sh -c "sleep infinity"
 
+    ports:
+      - 80:9090
+
     networks:
       - caddy
     extra_hosts:
@@ -14,4 +17,4 @@ services:
     labels:
       caddy: cockpit.pibox.lan
       caddy.reverse_proxy: host.docker.internal:9090
-      # caddy.tls: internal
+      caddy.tls: internal
