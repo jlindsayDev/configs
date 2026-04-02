@@ -29,6 +29,9 @@ include:
   # Syncthing - upstreams 8384
   - ./services/syncthing/docker-compose.syncthing.yml
 
+  # Tailscale and tsdproxy
+  - ./services/tailscale/docker-compose.tailscale.yml
+
   # WatchYourLan - upstreams 8840
   # - ./services/watchyourlan/docker-compose.watchyourlan.yml
 
@@ -39,7 +42,6 @@ include:
   # - ./services/ntfy/docker-compose.ntfy.yml
 
   # TODO
-  # - ./services/tailscale/docker-compose.tailscale.yml
   # - ./services/changedetection/docker-compose.changedetection.yml
   # - ./services/syncthing/docker-compose.syncthing.yml
 
