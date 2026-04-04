@@ -1,5 +1,12 @@
 name: airmac
 
 include:
-  - ./services/pihole/pihole.docker-compose.yml
-  - ./services/caddy-docker-proxy/caddy-docker-proxy.docker-compose.yml
+  - ./services/pihole/docker-compose.pihole.yml
+  - ./services/caddy-docker-proxy/docker-compose.caddy-docker-proxy.yml
+  - ./services/deckhand/docker-compose.deckhand.yml
+  # - ./services/changedetection/changedetection.docker-compose.yml
+  # - ./services/ntfy/ntfy.docker-compose.yml
+
+networks:
+  caddy:
+    external: true
