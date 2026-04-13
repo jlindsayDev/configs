@@ -1,5 +1,8 @@
 # https://github.com/pi-hole/docker-pi-hole/
 # https://docs.pi-hole.net/docker/configuration/
+#
+# It is preferred to disable systemd-resolved port 53
+# https://docs.pi-hole.net/docker/tips-and-tricks/#disable-systemd-resolved-port-53
 services:
   pihole:
     container_name: pihole
@@ -44,8 +47,8 @@ services:
       FTLCONF_dns_upstreams: |-
         1.1.1.1
         1.0.0.1
-        8.8.8.8
-        8.8.4.4
+        2606:4700:4700::1111
+        2606:4700:4700::1001
 
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
