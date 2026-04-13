@@ -32,6 +32,9 @@ include:
   # Tailscale and tsdproxy
   - ./services/tailscale/docker-compose.tailscale.yml
 
+  # Glance
+  - ./services/glance/docker-compose.glance.yml
+
   # WatchYourLan - upstreams 8840
   # - ./services/watchyourlan/docker-compose.watchyourlan.yml
 
