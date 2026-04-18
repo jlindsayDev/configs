@@ -1,7 +1,7 @@
 # Pi-hole configuration file (v6.5)
 # Encoding: UTF-8
 # This file is managed by pihole-FTL
-# Last updated on 2026-04-01 11:32:24 PDT
+# Last updated on 2026-04-18 08:50:08 PDT
 
 [dns]
   # Upstream DNS Servers to be used by Pi-hole. If this is not set, Pi-hole will not
@@ -14,8 +14,8 @@
   upstreams = [
     "1.1.1.1",
     "1.0.0.1",
-    "8.8.8.8",
-    "8.8.4.4"
+    "2606:4700:4700::1111",
+    "2606:4700:4700::1001"
   ] ### CHANGED (env), default = []
 
   # Use this option to control deep CNAME inspection. Disabling it might be beneficial
