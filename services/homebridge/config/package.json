@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "homebridge": "1.11.4",
-    "homebridge-alexa-smarthome": "2.5.0",
+    "homebridge-alexa-smarthome": "2.5.2",
     "homebridge-z2m": "1.11.0"
   }
 }
