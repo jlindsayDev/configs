@@ -1,22 +1,39 @@
 configs:
   ts-serve:
     content: |
-      {"TCP":{"443":{"HTTPS":true}},
-      "Web":{"$${TS_CERT_DOMAIN}:443":
-          {"Handlers":{"/":
-          {"Proxy":"http://127.0.0.1:80/admin"}}}},
-      "AllowFunnel":{"$${TS_CERT_DOMAIN}:443":false}}
+      {
+        "TCP": {
+          "443":{ "HTTPS": true }
+        },
+        "Web": {
+          "$${TS_CERT_DOMAIN}: 443": {
+            "Handlers":{
+              "/": { "Proxy":"http://127.0.0.1:80/admin" }
+            }
+          }
+        },
+        "AllowFunnel": { "$${TS_CERT_DOMAIN}:443": false },
+        "services": {
+          "svc:$${SERVICE}": {
+            "endpoints": { "tcp:443": "https://localhost:443" }
+          }
+        }
+      }
 
 services:
 # Make sure you have updated/checked the .env file with the correct variables.
 # All the ${ xx } need to be defined there.
   # Tailscale Sidecar Configuration
-  service:ts-pihole:
+  ts-pihole:
     image: tailscale/tailscale:latest # Image to be used
-    container_name: tailscale-${SERVICE} # Name for local container management
+    container_name: ts-${SERVICE} # Name for local container management
     hostname: ${SERVICE} # Name used within your Tailscale environment
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
+      # - TS_CLIENT_ID=${TS_CLIENT_ID}
+      # - TS_CLIENT_SECRET=${TS_CLIENT_SECRET}
+      - TS_EXTRA_ARGS=--advertise-tags=tag:containers --service="svc:${SERVICE}"
+
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_SERVE_CONFIG=/config/serve.json # Tailscale Serve configuration to expose the web interface on your local Tailnet - remove this line if not required
       - TS_USERSPACE=false
@@ -57,13 +74,12 @@ services:
       - PGID=1000
       - TZ=${TZ}
     volumes:
-      - ../../${SERVICE}/pihole.toml:
       - ../../${SERVICE}/etc-pihole:/etc/pihole
       - ../../${SERVICE}/etc-dnsmasq.d:/etc/dnsmasq.d
       # - /etc/localtime:/etc/localtime:ro
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     depends_on:
-      tailscale:
+      ts-pihole:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"] # Check if ${SERVICE} process is running
