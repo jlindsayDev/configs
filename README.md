@@ -1,8 +1,12 @@
 #  Make My Server
 
-Inspired (and some parts borrowed from) [tomMoulard/make-my-server](https://github.com/tomMoulard/make-my-server)
+I am dabbling in the world of self-hosting. This is my testing-ground.
 
-### Run
+Inspired (and some parts borrowed from)
+- [tomMoulard/make-my-server](https://github.com/tomMoulard/make-my-server)
+- [tailscale-dev/scaletail](https://github.com/tailscale-dev/ScaleTail)
+
+### Run (ideally)
 
 ```bash
 bash ./scripts/install.sh machine_name directory [hosts...]
@@ -22,6 +26,7 @@ bash ./scripts/install.sh pibox /data/docker \
 ```
 
 ### TODO
+
 - [ ] make install script set things up
 - [ ] incorporate `ALLOWED_HOSTS`
 - [ ] allow selection of services to install
