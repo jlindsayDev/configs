@@ -1,6 +1,8 @@
 *.env*
 
+ts/
 data/
+
 config/
 logs/
 volumes/

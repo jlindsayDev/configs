@@ -31,9 +31,9 @@ services:
       - TS_AUTH_ONCE=true
     configs:
       - source: ts-serve
-        target: /config/serve.json
+        target: /ts/config/serve.json
     volumes:
-      - ./config:/config
+      - ./ts/config:/config
       - ./ts/state:/var/lib/tailscale
     devices:
       - /dev/net/tun:/dev/net/tun
@@ -56,8 +56,8 @@ services:
       - PGID=1000
       - TZ=${TZ}
     volumes:
-      - ../../${SERVICE}/etc-pihole:/etc/pihole
-      - ../../${SERVICE}/etc-dnsmasq.d:/etc/dnsmasq.d
+      - ./pihole.toml:/etc/pihole/pihole.toml
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - sys_nice
     depends_on:
