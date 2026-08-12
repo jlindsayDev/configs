@@ -6,7 +6,7 @@ configs:
           "443":{ "HTTPS": true }
         },
         "Web": {
-          "$${TS_CERT_DOMAIN}: 443": {
+          "$${TS_CERT_DOMAIN}:443": {
             "Handlers":{
               "/": { "Proxy":"http://127.0.0.1:80/admin" }
             }
@@ -15,7 +15,9 @@ configs:
         "AllowFunnel": { "$${TS_CERT_DOMAIN}:443": false },
         "services": {
           "svc:$${SERVICE}": {
-            "endpoints": { "tcp:443": "https://localhost:443" }
+            "endpoints": {
+              "tcp:443": "https://localhost:443"
+            }
           }
         }
       }
