@@ -2,30 +2,23 @@ configs:
   ts-serve:
     content: |
       {
+        "version": "0.0.1",
         "TCP": {
-          "443":{ "HTTPS": true }
+          "443": { "HTTPS": true }
         },
         "Web": {
-          "$${TS_CERT_DOMAIN}:443": {
-            "Handlers":{
-              "/": { "Proxy":"http://127.0.0.1:80/admin" }
+          "${TS_CERT_DOMAIN}:443": {
+            "Handlers": {
+              "/": {
+                "Proxy": "http://127.0.0.1:80/"
+              }
             }
           }
         },
-        "AllowFunnel": { "$${TS_CERT_DOMAIN}:443": false },
-        "services": {
-          "svc:$${SERVICE}": {
-            "endpoints": {
-              "tcp:443": "https://localhost:443"
-            }
-          }
-        }
+        "AllowFunnel": { "${TS_CERT_DOMAIN}:443": false }
       }
 
 services:
-# Make sure you have updated/checked the .env file with the correct variables.
-# All the ${ xx } need to be defined there.
-  # Tailscale Sidecar Configuration
   ts-pihole:
     image: tailscale/tailscale:latest # Image to be used
     container_name: ts-${SERVICE} # Name for local container management
@@ -34,7 +27,7 @@ services:
       - TS_AUTHKEY=${TS_AUTHKEY}
       # - TS_CLIENT_ID=${TS_CLIENT_ID}
       # - TS_CLIENT_SECRET=${TS_CLIENT_SECRET}
-      - TS_EXTRA_ARGS=--advertise-tags=tag:containers --service="svc:${SERVICE}"
+      - TS_EXTRA_ARGS=--advertise-tags=tag:containers
 
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_SERVE_CONFIG=/config/serve.json # Tailscale Serve configuration to expose the web interface on your local Tailnet - remove this line if not required
@@ -64,13 +57,12 @@ services:
       timeout: 10s # Time to wait for the check to succeed
       retries: 3 # Number of retries before marking as unhealthy
       start_period: 10s # Time to wait before starting health checks
-    restart: always
+    restart: on-failure:3
 
-  # ${SERVICE}
-  application:
+  pihole:
     image: ${IMAGE_URL} # Image to be used
     network_mode: service:ts-pihole # Sidecar configuration to route ${SERVICE} through Tailscale
-    container_name: app-${SERVICE} # Name for local container management
+    container_name: ${SERVICE} # Name for local container management
     environment:
       - PUID=1000
       - PGID=1000
@@ -80,13 +72,16 @@ services:
       - ../../${SERVICE}/etc-dnsmasq.d:/etc/dnsmasq.d
       # - /etc/localtime:/etc/localtime:ro
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - sys_nice
     depends_on:
       ts-pihole:
         condition: service_healthy
+
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"] # Check if ${SERVICE} process is running
       interval: 1m # How often to perform the check
       timeout: 10s # Time to wait for the check to succeed
       retries: 3 # Number of retries before marking as unhealthy
       start_period: 30s # Time to wait before starting health checks
-    restart: always
+    restart: on-failure:3
