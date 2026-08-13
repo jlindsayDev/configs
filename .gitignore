@@ -3,7 +3,6 @@
 ts/
 data/
 
-config/
 logs/
 volumes/
 metadata/
