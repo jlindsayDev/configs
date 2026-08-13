@@ -31,14 +31,14 @@ services:
       - TS_AUTH_ONCE=true
     configs:
       - source: ts-serve
-        target: /ts/config/serve.json
+        target: /config/serve.json
     volumes:
-      - ./ts/config:/config
-      - ./ts/state:/var/lib/tailscale
+      - ./data/config:/config
+      - ./data/state:/var/lib/tailscale # needed for SSL certs
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
-      - net_admin
+      - NET_ADMIN
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:41234/healthz"]
       interval: 1m
@@ -59,7 +59,7 @@ services:
       - ./pihole.toml:/etc/pihole/pihole.toml
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
-      - sys_nice
+      - SYS_NICE
     depends_on:
       ts-pihole:
         condition: service_healthy
