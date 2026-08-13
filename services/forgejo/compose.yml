@@ -9,7 +9,7 @@ services:
       - USER_UID=1000
       - USER_GID=1000
     volumes:
-      - ./forgejo-data:/data
+      - ./data:/data
       - /etc/localtime:/etc/localtime:ro
     labels:
       tsdproxy.enable: true
