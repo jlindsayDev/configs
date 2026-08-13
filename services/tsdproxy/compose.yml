@@ -1,6 +1,6 @@
 services:
   tsdproxy:
-    image: almeidapaulopt/tsdproxy:2
+    image: almeidapaulopt/tsdproxy:3
     container_name: tsdproxy
     hostname: tsdproxy
     restart: unless-stopped
