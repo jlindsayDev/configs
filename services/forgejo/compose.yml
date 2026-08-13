@@ -1,0 +1,21 @@
+# https://forgejo.org/docs/latest/admin/installation/docker/
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:16
+    container_name: forgejo
+    hostname: forgejo
+    restart: no
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    volumes:
+      - ./forgejo-data:/data
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      tsdproxy.enable: true
+      tsdproxy.name: forgejo
+      tsdproxy.port.1: "443/https:3000/http"
+      tsdproxy.port.2: "22/https:22/http"
+    # ports:
+    #   - 3000:3000
+    #   - 222:22
