@@ -1,0 +1,29 @@
+services:
+  homebridge:
+    image: homebridge/homebridge:latest
+    container_name: homebridge
+    hostname: homebridge
+    network_mode: host
+    restart: no
+    volumes:
+      - ./homebridge:/homebridge
+      # - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
+    environment:
+      - ENABLE_AVAHI=0
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
+    labels:
+      - "docktail.service.enable=true"
+      - "docktail.service.name=homebridge"
+      - "docktail.service.description=Home control"
+      - "docktail.service.port=8581"
+      - "docktail.service.service-port=443"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8581 || exit 1"]
+      interval: 60s
+      retries: 5
+      start_period: 300s
+      timeout: 2s

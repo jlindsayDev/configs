@@ -1,0 +1,26 @@
+services:
+  zigbee:
+    image: ghcr.io/koenkk/zigbee2mqtt
+    container_name: zigbee
+    hostname: zigbee
+    restart: no
+    group_add:
+      - dialout
+    user: 1000:1000
+    depends_on:
+      - mqtt
+    ports:
+      - 8080:8080
+    volumes:
+      - ./zigbee:/app/data
+      - /run/udev:/run/udev:ro
+    environment:
+      - TZ=America/Los_Angeles
+    devices:
+      - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_3a7de9d2f912ec11942420c7bd930c07-if00-port0:/dev/ttyUSB0
+    labels:
+      - "docktail.service.enable=true"
+      - "docktail.service.name=zigbee"
+      - "docktail.service.description=Interface with MQTT"
+      - "docktail.service.port=8080"
+      - "docktail.service.service-port=443"
