@@ -12,18 +12,18 @@ services:
     cap_add:
       - SYS_NICE
     ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 80:80/tcp
-      - 443:443/tcp
+      - 53:53/tcp # DNS
+      - 53:53/udp # DNS
+      # - 80:80/tcp # HTTP
+      - 443:443/tcp # HTTPS
       #- 67:67/udp # DHCP
       #- 123:123/udp # NTP
     labels:
-      tsdproxy.enable: true
-      tsdproxy.name: pihole
-      tsdproxy.port.1: "443/https:443/https"
-      tsdproxy.port.2: "80/http:80/http"
-      tsdproxy.port.3: "53/tcp:53/tcp"
+      docktail.service.enable: true
+      docktail.service.name: pihole
+      docktail.service.description: Network-wide ad blocker
+      docktail.service.port: 443
+      docktail.service.service.port: 443
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"]
       interval: 1m

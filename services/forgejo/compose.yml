@@ -12,10 +12,16 @@ services:
       - ./data:/data
       - /etc/localtime:/etc/localtime:ro
     labels:
-      tsdproxy.enable: true
-      tsdproxy.name: forgejo
-      tsdproxy.port.1: "443/https:3000/http"
-      tsdproxy.port.2: "22/https:22/http"
+      docktail.service.enable: true
+      docktail.service.name: forgejo
+      docktail.service.description: Git server
+      docktail.service.port: 3000
+      docktail.service.service-port: 443
+      docktail.service.1.enable: true
+      docktail.service.1.name: forgejo
+      docktail.service.1.port: 2222
+      docktail.service.1.protocol: tcp
+      docktail.service.1.service-port: 22
     # ports:
     #   - 3000:3000
     #   - 222:22
