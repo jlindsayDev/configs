@@ -1,11 +1,10 @@
 services:
   pihole:
-    image: ${IMAGE_URL}
-    container_name: ${SERVICE}
+    image: pihole/pihole:latest
+    container_name: pihole
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=${TZ}
     volumes:
       - ./pihole.toml:/etc/pihole/pihole.toml
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
@@ -15,9 +14,9 @@ services:
       - 53:53/tcp # DNS
       - 53:53/udp # DNS
       # - 80:80/tcp # HTTP
-      - 443:443/tcp # HTTPS
-      #- 67:67/udp # DHCP
-      #- 123:123/udp # NTP
+      # - 443:443/tcp # HTTPS
+      # - 67:67/udp # DHCP
+      # - 123:123/udp # NTP
     labels:
       docktail.service.enable: true
       docktail.service.name: pihole
