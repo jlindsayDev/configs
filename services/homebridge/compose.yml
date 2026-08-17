@@ -6,7 +6,7 @@ services:
     network_mode: host
     restart: no
     volumes:
-      - ./homebridge:/homebridge
+      - ./data:/homebridge
       # - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
     environment:
       - ENABLE_AVAHI=0
