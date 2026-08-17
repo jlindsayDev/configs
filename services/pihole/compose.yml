@@ -3,13 +3,16 @@ services:
     image: pihole/pihole:latest
     container_name: pihole
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: 1000
+      PGID: 1000
+      PIHOLE_UID: 1000
+      PIHOLE_GID: 1000
     volumes:
       - ./pihole.toml:/etc/pihole/pihole.toml
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - SYS_NICE
+      - SYS_TIME
     ports:
       - 53:53/tcp # DNS
       - 53:53/udp # DNS
@@ -22,7 +25,7 @@ services:
       docktail.service.name: pihole
       docktail.service.description: Network-wide ad blocker
       docktail.service.port: 443
-      docktail.service.service.port: 443
+      docktail.service.service-port: 443
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"]
       interval: 1m
