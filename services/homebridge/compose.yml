@@ -16,11 +16,11 @@ services:
         max-size: "10m"
         max-file: "1"
     labels:
-      - "docktail.service.enable=true"
-      - "docktail.service.name=homebridge"
-      - "docktail.service.description=Home control"
-      - "docktail.service.port=8581"
-      - "docktail.service.service-port=443"
+      docktail.service.enable: true
+      docktail.service.name: homebridge
+      docktail.service.description: Home control
+      docktail.service.port: 8581
+      docktail.service.service-port: 443
     healthcheck:
       test: ["CMD-SHELL", "curl --fail http://localhost:8581 || exit 1"]
       interval: 60s
