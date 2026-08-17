@@ -8,7 +8,7 @@ services:
       PIHOLE_UID: 1000
       PIHOLE_GID: 1000
     volumes:
-      - ./pihole.toml:/etc/pihole/pihole.toml
+      - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - SYS_NICE
@@ -24,7 +24,8 @@ services:
       docktail.service.enable: true
       docktail.service.name: pihole
       docktail.service.description: Network-wide ad blocker
-      docktail.service.port: 443
+      docktail.service.protocol: http
+      docktail.service.port: 80
       docktail.service.service-port: 443
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"]
