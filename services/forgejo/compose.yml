@@ -1,7 +1,7 @@
 # https://forgejo.org/docs/latest/admin/installation/docker/
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:latest
+    image: codeberg.org/forgejo/forgejo:16
     container_name: forgejo
     hostname: forgejo
     restart: no
