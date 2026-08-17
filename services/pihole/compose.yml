@@ -24,7 +24,6 @@ services:
       docktail.service.enable: true
       docktail.service.name: pihole
       docktail.service.description: Network-wide ad blocker
-      docktail.service.protocol: http
       docktail.service.port: 80
       docktail.service.service-port: 443
     healthcheck:
