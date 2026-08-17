@@ -10,3 +10,18 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
+    environment:
+      PUID: 1000
+      GUID: 1000
+    labels:
+      docktail.service.enable: true
+      docktail.service.name: homeassistant
+      docktail.service.description: Advanced home control
+      docktail.service.port: 8123
+      docktail.service.service-port: 443
+    healthcheck:
+      test: "curl --fail http://localhost:8123/ || exit 1" # Check if ${SERVICE} process is running
+      interval: 1m # How often to perform the check
+      timeout: 10s # Time to wait for the check to succeed
+      retries: 3 # Number of retries before marking as unhealthy
+      start_period: 30s # Time to wait before starting health checks
