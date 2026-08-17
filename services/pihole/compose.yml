@@ -26,6 +26,12 @@ services:
       docktail.service.description: Network-wide ad blocker
       docktail.service.port: 80
       docktail.service.service-port: 443
+      docktail.service.1.enable: true
+      docktail.service.1.name: pihole
+      docktail.service.1.port: 53
+      docktail.service.1.protocol: tcp
+      docktail.service.1.service-port: 53
+      docktail.service.network: ipv6net
     healthcheck:
       test: ["CMD", "pgrep", "-f", "pihole-FTL"]
       interval: 1m
@@ -33,3 +39,12 @@ services:
       retries: 3
       start_period: 30s
     restart: on-failure:3
+    networks:
+      - ipv6net
+
+networks:
+  ipv6net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
