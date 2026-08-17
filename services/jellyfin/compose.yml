@@ -1,0 +1,32 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    hostname: jellyfin
+    restart: no
+    user: 1000:1000
+    # ports:
+    #   - 8096:8096/tcp
+    #   - 8920:8920/tcp
+    #   - 7359:7359/udp # Client Discovery
+    #   - 1900:1900/udp # DLNA/UPnP
+    labels:
+      docktail.service.enable: true
+      docktail.service.name: jellyfin
+      docktail.service.description: Media server
+      docktail.service.port: 8096
+      docktail.service.service-port: 443
+      docktail.service.1.enable: true
+      docktail.service.1.name: jellyfin
+      docktail.service.1.port: 7359
+      docktail.service.1.protocol: udp
+      docktail.service.1.service-port: 7359
+      docktail.service.2.enable: true
+      docktail.service.2.name: jellyfin
+      docktail.service.2.port: 1900
+      docktail.service.2.protocol: udp
+      docktail.service.2.service-port: 1900
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /data/media:/media:ro
