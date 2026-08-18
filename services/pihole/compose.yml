@@ -2,9 +2,8 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
+    hostname: pihole
     environment:
-      PUID: 1000
-      PGID: 1000
       PIHOLE_UID: 1000
       PIHOLE_GID: 1000
     volumes:
