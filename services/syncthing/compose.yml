@@ -1,0 +1,20 @@
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: syncthing
+    restart: no
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    labels:
+      docktail.service.enable: true
+      docktail.service.name: syncthing
+      docktail.service.description: Sync coordinator
+      docktail.service.port: 8384
+      docktail.service.service-port: 443
+    volumes:
+      - ./config:/config
+      - ./data:/data
