@@ -1,0 +1,21 @@
+services:
+  glance:
+    container_name: glance
+    hostname: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./assets:/app/assets
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/tailscale:/var/run/tailscale:ro
+    labels:
+      docktail.service.enable: true
+      docktail.service.name: glance
+      docktail.service.description: Dashboard
+      docktail.service.port: 8080
+      docktail.service.service-port: 443
+    #ports:
+    #  - 8080:8080
+    env_file: .env
