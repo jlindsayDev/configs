@@ -62,3 +62,7 @@
 	path = ~/.config/git/alias.gitconfig
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[credential "https://forgejo.komodo-decibel.ts.net"]
+	provider = generic
+[rebase]
+	autoStash = true
