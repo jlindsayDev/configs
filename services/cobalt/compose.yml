@@ -1,0 +1,21 @@
+services:
+  cobalt:
+    image: ghcr.io/imputnet/cobalt:10
+    container_name: cobalt
+    hostname: cobalt
+    init: true
+    # ports:
+    #   - 9000:9000/tcp
+    environment:
+      API_URL: "https://cobalt.komodo-decibel.ts.net/"
+      # if you want to use cookies when fetching data from services, uncomment the next line and the lines under volume
+      # COOKIE_PATH: "/cookies.json"
+      # see docs/run-an-instance.md for more information
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.scope: cobalt
+      docktail.service.enable: true
+      docktail.service.name: cobalt
+      docktail.service.description: Web media download tools
+      docktail.service.port: 9000
+      docktail.service.service-port: 443
