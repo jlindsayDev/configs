@@ -1,6 +1,6 @@
 services:
   cobalt:
-    image: ghcr.io/imputnet/cobalt:10
+    image: ghcr.io/imputnet/cobalt:11
     container_name: cobalt
     hostname: cobalt
     init: true
