@@ -1,0 +1,20 @@
+services:
+  dockge:
+    container_name: dockge
+    hostname: dockge
+    image: louislam/dockge:1
+    restart: unless-stopped
+    # ports:
+    #   - 5001:5001
+    labels:
+      docktail.service.enable: true
+      docktail.service.name: dockge
+      docktail.service.description: Docker management
+      docktail.service.port: 5001
+      docktail.service.service-port: 443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - ./opt_stacks:/opt/stacks
+    environment:
+      - DOCKGE_STACKS_DIR=/opt/stacks
