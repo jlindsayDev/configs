@@ -3,7 +3,7 @@ services:
     image: eclipse-mosquitto:latest
     container_name: mqtt
     hostname: mqtt
-    restart: no
+    restart: always
     ports:
       - 1883:1883 # MQTT
       - 9001:9001 # HTTP/WebSockets

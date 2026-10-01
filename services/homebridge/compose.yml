@@ -4,7 +4,7 @@ services:
     container_name: homebridge
     hostname: homebridge
     network_mode: host
-    restart: no
+    restart: always
     volumes:
       - ./data:/homebridge
       # - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket

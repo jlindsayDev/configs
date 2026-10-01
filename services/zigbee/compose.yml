@@ -3,7 +3,7 @@ services:
     image: ghcr.io/koenkk/zigbee2mqtt
     container_name: zigbee
     hostname: zigbee
-    restart: no
+    restart: always
     group_add:
       - dialout
     user: 1000:1000
